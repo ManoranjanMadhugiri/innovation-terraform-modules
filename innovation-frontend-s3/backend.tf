@@ -26,7 +26,7 @@ resource "aws_s3_bucket" "inbuck" {
 resource "aws_s3_bucket" "log_bucket" {
   bucket = "innov-log-bucket-${var.region}-${var.env}"
   acl    = "log-delivery-write"
-
+  force_destroy = true
   tags {
     Name        = "Log bucket"
     Environment = "${var.env}"

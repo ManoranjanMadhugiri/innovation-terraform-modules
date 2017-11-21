@@ -91,7 +91,7 @@ resource "aws_security_group_rule" "security_group_inbound" {
   protocol          = "${var.protocol}"
   from_port         = "${element(var.from_ports, count.index)}"
   to_port           =  "${element(var.to_ports, count.index)}"
-  source_security_group_id = "${element(var.source_security_groups, "${length(var.source_security_groups) - (count.index + 1) < 0 ? (length(var.source_security_groups)-1) : count.index}")}"
+  source_security_group_id = "${element(var.source_security_groups,count.index)}"
   security_group_id = "${aws_security_group.security_group.id}"
 }
 

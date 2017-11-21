@@ -1,4 +1,4 @@
 #!/bin/sh
 set -x
 
-/prod/products/tools/bootstrapInnovation.sh -s ${arguments} -n 1 -e ${env}
+/prod/products/tools/bootstrapInnovation.sh ${arguments} -n 1 -e ${env}

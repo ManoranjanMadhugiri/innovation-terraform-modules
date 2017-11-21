@@ -1,5 +1,5 @@
 resource "aws_autoscaling_group" "innov-autoscaling" {
-  name_prefix          = "${var.name}-${var.env}"
+  name          = "${var.name}"
   vpc_zone_identifier  =["${var.public_subnet_ids}"]
   launch_configuration = "${var.launch_conf}"
   min_size             = "${var.min_size}"

@@ -47,7 +47,7 @@ resource "aws_alb" "alb" {
     prefix  = ""
   }
 
-  tags = "${merge(var.default_tags, map("env","${var.env}")}"
+  tags = "${merge(var.default_tags, map("env","${var.env}"))}"
 }
 
 output "alb_arn" {

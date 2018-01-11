@@ -5,12 +5,11 @@ resource "aws_alb_listener_rule" "innovation-frontend-listener-rule" {
   action {
     type = "${var.action}"
 
-  target_group_arn = "${var.alb_target_arn}"
+    target_group_arn = "${var.alb_target_arn}"
   }
 
   condition {
     field  = "path-pattern"
-    values =["${var.route_path}"]
+    values = ["${var.route_path}"]
   }
-
 }

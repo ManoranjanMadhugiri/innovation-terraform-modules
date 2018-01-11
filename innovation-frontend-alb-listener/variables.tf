@@ -1,5 +1,5 @@
 variable "target_group_arn" {
-  default = ""
+  default     = ""
   description = "The Amazon Resource Name (ARN) of the target group."
 }
 
@@ -10,7 +10,7 @@ variable "alb_arn" {
 }
 
 variable "port" {
-  default= 80
+  default     = 80
   description = "The port on which the load balancer is listening."
 }
 
@@ -34,13 +34,12 @@ variable "certificate_arn" {
   description = "The ARN of the SSL server certificate."
 }
 
-variable "route_path"{
-default     = []
-description = "The route path to the provided URL."
+variable "route_path" {
+  default     = []
+  description = "The route path to the provided URL."
 }
 
-
-variable "priority"{
-default     = ""
-description = "The route path to the provided URL."
+variable "priority" {
+  default     = ""
+  description = "The route path to the provided URL."
 }

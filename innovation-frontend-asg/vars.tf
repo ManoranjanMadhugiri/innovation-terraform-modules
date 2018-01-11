@@ -12,18 +12,17 @@ variable "launch_conf" {
 
 variable "target_group_arns" {
   type = "list"
-
 }
 
-variable "min_size"{}
+variable "min_size" {}
 
-variable "max_size"{}
+variable "max_size" {}
 
-variable "health_check_type"{
+variable "health_check_type" {
   default = "EC2"
 }
 
-variable "name"{}
+variable "name" {}
 
 variable "health_check_grace_period" {
   default = "200"

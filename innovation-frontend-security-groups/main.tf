@@ -17,15 +17,15 @@
  *
  */
 
- terraform {
-   required_version = ">= 0.10.6"
- }
-
+terraform {
+  required_version = ">= 0.10.6"
+}
 
 // The ID of the VPC.
 variable "vpc_id" {
   type = "string"
 }
+
 // The description field for the Security Group. The default is the built-in Terraform default:
 // "Managed by Terraform".
 variable "description" {
@@ -43,32 +43,12 @@ variable "sec_name" {
   default = ""
 }
 
-variable "to_ports" {
-  type="list"
-  default = []
-}
-
-variable "from_ports" {
-  type="list"
-  default = []
-}
-
-variable "source_security_groups" {
-  type="list"
-  default = []
-}
-
-variable "protocol"{
-  default = "tcp"
-}
-
 variable "env" {
   default = ""
 }
 
 locals {
-
-  default_tags   = "${map("Created By", "Terraform")}"
+  default_tags   = "${map("Created By", "innovation-Terraform")}"
   name_tag_key   = "${compact(split(",", length(var.display_name) == 0 ? "" : "Name"))}"
   name_tag_value = "${compact(split(",", length(var.display_name) == 0 ? "" : "${var.display_name}"))}"
 }
@@ -82,27 +62,6 @@ resource "aws_security_group" "security_group" {
     local.default_tags,
     zipmap(local.name_tag_key, local.name_tag_value)
     )}"
-}
-
-
-resource "aws_security_group_rule" "security_group_inbound" {
-  count             = "${length(var.from_ports)}"
-  type              = "ingress"
-  protocol          = "${var.protocol}"
-  from_port         = "${element(var.from_ports, count.index)}"
-  to_port           =  "${element(var.to_ports, count.index)}"
-  source_security_group_id = "${element(var.source_security_groups,count.index)}"
-  security_group_id = "${aws_security_group.security_group.id}"
-}
-
-
-resource "aws_security_group_rule" "security_group_outbound" {
-  type              = "egress"
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
-  from_port         = 0
-  to_port           = 0
-  security_group_id = "${aws_security_group.security_group.id}"
 }
 
 // The ID of the created security group.

@@ -1,5 +1,6 @@
 variable "AMIS" {
   type = "map"
+
   default = {
     us-east-1 = "ami-13be557e"
     us-west-2 = "ami-8ea073f6"
@@ -26,9 +27,11 @@ variable "security_groups" {
 variable "instance_type" {
   default = ""
 }
+
 variable "iam_instance_profile" {
   default = "s3_derwent-innovation"
 }
+
 variable "arguments" {
   default = ""
 }

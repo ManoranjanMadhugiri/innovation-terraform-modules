@@ -31,3 +31,7 @@ variable "health_check_grace_period" {
 variable "desired_capacity" {
   default = "1"
 }
+
+variable "extra_tags" {
+  default = []
+}

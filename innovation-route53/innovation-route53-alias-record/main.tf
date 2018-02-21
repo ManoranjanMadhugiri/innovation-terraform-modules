@@ -1,5 +1,5 @@
 variable "zone_id" {
-  default = ""
+  type = "list"
 }
 
 variable "name" {

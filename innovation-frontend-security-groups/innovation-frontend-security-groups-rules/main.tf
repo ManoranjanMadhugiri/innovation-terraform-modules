@@ -35,12 +35,3 @@ resource "aws_security_group_rule" "security_group_inbound" {
   security_group_id        = "${var.security_group_id}"
   description              = "${var.description}"
 }
-
-resource "aws_security_group_rule" "security_group_outbound" {
-  type              = "egress"
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
-  from_port         = 0
-  to_port           = 0
-  security_group_id = "${var.security_group_id}"
-}

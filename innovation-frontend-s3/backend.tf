@@ -5,11 +5,12 @@ variable "env" {
 variable "region" {}
 
 resource "aws_s3_bucket" "inbuck" {
-  bucket = "derwent-innovation-${var.region}-${var.env}"
-  acl    = "private"
+  bucket        = "derwent-innovation-${var.region}-${var.env}"
+  acl           = "private"
+  force_destroy = true
 
   logging {
-    target_bucket = "${aws_s3_bucket.log_bucket.id}"
+    target_bucket = "innov-log-bucket-${var.region}-${var.env}"
     target_prefix = "log/"
   }
 

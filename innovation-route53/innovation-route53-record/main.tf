@@ -26,5 +26,5 @@ resource "aws_route53_record" "innovation_route53_record" {
   name    = "${var.name}"
   type    = "${var.type}"
   ttl     = "${var.ttl}"
-  records = ["${var.records}"]
+  records = ["${element(var.records,count.index)}"]
 }

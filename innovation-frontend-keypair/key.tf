@@ -1,7 +1,3 @@
-variable "private_key" {
-  default = "my_key"
-}
-
 variable "public_key" {
   default = "my_key.pub"
 }

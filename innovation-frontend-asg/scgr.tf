@@ -10,17 +10,30 @@ resource "aws_autoscaling_group" "innov-autoscaling" {
   desired_capacity          = "${var.desired_capacity}"
   target_group_arns         = ["${var.target_group_arns}"]
 
-  tag {
-    key                 = "Name"
-    value               = "${var.name}"
-    propagate_at_launch = true
-  }
+  tags = ["${concat(
+                  list(
+                        map("key", "Name", "value",var.name,"propagate_at_launch",true),
+                        map("key", "created_by", "value", "innovation-terraform" ,"propagate_at_launch",true)
+                  ),
+    var.extra_tags)}"]
 
-  tag {
-    key                 = "created_by"
-    value               = "innovation-terraform"
-    propagate_at_launch = true
-  }
+  # tag {
+  #   key                 = "Name"
+  #   value               = "${var.name}"
+  #   propagate_at_launch = true
+  # }
+  #
+  # tag {
+  #   key                 = "created_by"
+  #   value               = "innovation-terraform"
+  #   propagate_at_launch = true
+  # }
+  #
+  # tag {
+  #   key                 = "serviceGroup"
+  #   value               = "${var.env:var.name}"
+  #   propagate_at_launch = true
+  # }
 }
 
 output "aws_autoscaling_group_name" {

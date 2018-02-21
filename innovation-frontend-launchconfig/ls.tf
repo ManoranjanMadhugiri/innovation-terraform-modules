@@ -25,8 +25,12 @@ data "template_file" "user_data" {
   template = "${file("${path.module}/userdata.sh")}"
 
   vars {
-    arguments = "${var.arguments}"
-    env       = "${var.env}"
+    service_name         = "${var.service_name}"
+    env                  = "${var.env}"
+    domain               = "${var.domain_name}"
+    region               = "${var.AWS_REGION}"
+    dynomite_clusterName = "${var.dynomite_clusterName}"
+    node_count           = "${var.node_count}"
   }
 }
 

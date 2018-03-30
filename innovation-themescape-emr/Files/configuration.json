@@ -1,0 +1,29 @@
+[
+{
+    "Classification": "mapred-site",
+    "Properties": {
+      "mapreduce.job.counters.max": "2000",
+	  "mapreduce.map.output.compress": "true",
+      "mapreduce.output.fileoutputformat.compress.type": "BLOCK",
+      "mapreduce.shuffle.max.connections": "80",
+	  "mapreduce.user.classpath.first": "true"
+    }
+  },
+  {
+    "Classification": "yarn-site",
+    "Properties": {
+	"yarn.nodemanager.vmem-check-enabled":"false",
+      "yarn.nodemanager.pmem-check-enabled": "false",
+	  "yarn.scheduler.fair.preemption": "true",
+	"yarn.scheduler.capacity.node-locality-delay":"0"
+    }
+  },
+  {
+    "Classification": "hdfs-site",
+    "Properties": {
+	"dfs.replication":"1",
+	"dfs.namenode.datanode.registration.ip-hostname-check":"false"
+    }
+  }
+
+ ]

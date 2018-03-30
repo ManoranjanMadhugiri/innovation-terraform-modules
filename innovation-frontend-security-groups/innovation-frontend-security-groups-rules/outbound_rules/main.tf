@@ -1,0 +1,37 @@
+variable "source_security_groups" {
+  type    = "list"
+  default = []
+}
+
+variable "from_ports" {
+  type    = "list"
+  default = []
+}
+
+variable "to_ports" {
+  type    = "list"
+  default = []
+}
+
+variable "protocol" {
+  default = "tcp"
+}
+
+variable "security_group_id" {
+  default = ""
+}
+
+variable "description" {
+  default = ""
+}
+
+resource "aws_security_group_rule" "security_group_outbound" {
+  count                    = "${length(var.from_ports)}"
+  type                     = "egress"
+  protocol                 = "${var.protocol}"
+  from_port                = "${element(var.from_ports, count.index)}"
+  to_port                  = "${element(var.to_ports, count.index)}"
+  source_security_group_id = "${element(var.source_security_groups,count.index)}"
+  security_group_id        = "${var.security_group_id}"
+  description              = "${var.description}"
+}

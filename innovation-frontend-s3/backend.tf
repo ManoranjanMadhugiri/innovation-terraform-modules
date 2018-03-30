@@ -49,3 +49,25 @@ resource "aws_s3_bucket" "alb_log_bucket" {
     created_by  = "innovation-terraform"
   }
 }
+
+resource "aws_s3_bucket_policy" "b" {
+  bucket = "${aws_s3_bucket.alb_log_bucket.id}"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Id": "MYBUCKETPOLICY",
+  "Statement": [
+    {
+      "Sid": "AWSConsoleStmt-di-alb-${var.region}-${var.env}",
+      "Effect": "Allow",
+      "Principal": {
+       "AWS": "arn:aws:iam::797873946194:root"
+       },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::di-alb-${var.region}-${var.env}/AWSLogs/687890756020/*"
+    }
+  ]
+}
+EOF
+}

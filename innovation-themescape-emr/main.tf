@@ -26,10 +26,37 @@ resource "aws_emr_cluster" "emr_cluster" {
   }
 
   instance_group = [{
-    instance_role  = "MASTER"
+    instance_role  = "TASK"
     instance_type  = "r3.xlarge"
-    instance_count = "1"
-  }]
+    instance_count = "2"
+    name           = "task instance group"
+
+    ebs_config {
+      size = "1024"
+      type = "gp2"
+    }
+
+    autoscaling_policy = "${file("${path.module}/Files/autoscalingpolicy.json")}"
+  },
+    {
+      instance_role  = "CORE"
+      instance_type  = "r3.xlarge"
+      instance_count = "1"
+      name           = "core instance group"
+
+      ebs_config {
+        size = "1024"
+        type = "gp2"
+      }
+
+      autoscaling_policy = "${file("${path.module}/Files/autoscalingpolicy.json")}"
+    },
+    {
+      instance_role  = "MASTER"
+      instance_type  = "r3.xlarge"
+      instance_count = "1"
+    },
+  ]
 
   bootstrap_action {
     path = "s3://themescape-emr-us-west-2-prod/bootstrap-actions/bootstrap.sh"
